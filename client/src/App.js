@@ -21,7 +21,7 @@ const App = (props) => {
     let token = localStorage.getItem("authToken");
 
   const login = async (credentials) => {
-    post("/users/login", credentials)
+    post("/mentors/login", credentials)
         .then((results) => {
           localStorage.setItem("authToken", results.data.token);
           localStorage.setItem("id", results.data.id);
@@ -33,7 +33,7 @@ const App = (props) => {
   };
 
   const register = async (credentials) => {
-    post("/users/signup", credentials)
+    post("/mentors/signup", credentials)
         .then((results) => {
           localStorage.setItem("authToken", results.data.token);
           localStorage.setItem("id", results.data.id);
