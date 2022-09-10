@@ -10,6 +10,9 @@ require("dotenv/config");
 
 const isLoggedIn = require("../middleware/isLoggedIn");
 
+const cloudinary = require("../middleware/cloudinary");
+const upload = require("../middleware/multer");
+
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
