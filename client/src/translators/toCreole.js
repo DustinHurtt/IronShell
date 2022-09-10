@@ -25,7 +25,7 @@ export const toCreole = (text) => {
             'to': 'ht'
         },
         data: [{
-            'text': 'I would really like to drive your car around the block a few times!'
+            'text': `${text}`
         }],
         responseType: 'json'
     }).then(function(response){

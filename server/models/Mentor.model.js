@@ -8,12 +8,8 @@ const mentorSchema = new Schema(
     firstName: String,
     lastName: String,
     email: String,
-    phoneNumber: {
-      type: Number,
-      required: true},
-    zipCode: {
-      type: Number,
-      required: true},
+    phoneNumber: Number,
+    zipCode: Number,
     imageUrl: String,
     educationLevel: {
       type: String,
