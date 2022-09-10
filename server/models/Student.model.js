@@ -25,4 +25,4 @@ const studentSchema = new Schema(
   }
 );
 
-module.exports = model("Student", mentorSchema);
+module.exports = model("Student", studentSchema);
