@@ -3,6 +3,7 @@ const { Schema, model } = mongoose;
 
 const mentorSchema = new Schema(
   {
+    userName: String,
     firstName: String,
     lastName: String,
     email: String,
