@@ -26,7 +26,7 @@ const PublicRoutes = (props) => {
         }
       />
       <Route path="*" element={<Navigate to="/" replace />} />
-      <Route path="/quiz" element={<Quiz />} />
+      {/* <Route path="/quiz" element={<Quiz />} /> */}
     </Routes>
   );
 };
