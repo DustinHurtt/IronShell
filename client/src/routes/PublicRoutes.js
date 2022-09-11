@@ -19,6 +19,8 @@ import {
           path="/"
           element={
             <Landing
+              registerStudent={props.registerStudent}
+              registerMentor={props.registerMentor}
               register={props.register}
               login={props.login}
               setErrorMessage={props.setErrorMessage}
