@@ -15,7 +15,9 @@ import EntryButton from "./EntryButton";
 import Greeting from "./Greeting";
 import Username from "./Username";
 
-const Login = ({ login, changeEntry, setErrorMessage }) => {
+const Login = ({ loginStudent, loginMentor, changeEntry, setErrorMessage }) => {
+
+  const isMentor = React.useState(false)
 
 
   const handleLogin = async (event) => {
@@ -26,7 +28,7 @@ const Login = ({ login, changeEntry, setErrorMessage }) => {
     const password = formElements.password.value;
     setErrorMessage(`Welcome ${username}!`);
 
-    await login({ username, password });
+    await isMentor ? loginMentor({ username, password }) : loginStudent({ username, password })
   };
 
 

@@ -22,8 +22,8 @@ const App = (props) => {
 
     let token = localStorage.getItem("authToken");
 
-  const login = async (credentials) => {
-    post("/users/login", credentials)
+  const loginMentor = async (credentials) => {
+    post("/mentors/login", credentials)
         .then((results) => {
           localStorage.setItem("authToken", results.data.token);
           localStorage.setItem("id", results.data.id);
@@ -34,8 +34,32 @@ const App = (props) => {
         });
   };
 
-  const register = async (credentials) => {
-    post("/users/signup", credentials)
+  const loginStudent = async (credentials) => {
+    post("/students/login", credentials)
+        .then((results) => {
+          localStorage.setItem("authToken", results.data.token);
+          localStorage.setItem("id", results.data.id);
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log("Something went wrong", err.message);
+        });
+  };
+
+  const registerMentor = async (credentials) => {
+    post("/mentors/signup", credentials)
+        .then((results) => {
+          localStorage.setItem("authToken", results.data.token);
+          localStorage.setItem("id", results.data.id);
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log("Something went wrong", err.message);
+        });
+  };
+
+  const registerStudent = async (credentials) => {
+    post("/students/signup", credentials)
         .then((results) => {
           localStorage.setItem("authToken", results.data.token);
           localStorage.setItem("id", results.data.id);
@@ -72,7 +96,7 @@ const App = (props) => {
       )}
 
         <AuthorizationContext.Provider value={token}>
-            {!!token ? <PrivateRoutes logout={logout} /> : <PublicRoutes register={register} login={login} setErrorMessage={setErrorMessage}  />}
+            {!!token ? <PrivateRoutes logout={logout} /> : <PublicRoutes registerMentor={registerMentor} registerStudent={registerStudent} loginMentor={loginMentor} loginStudent={loginStudent} setErrorMessage={setErrorMessage}  />}
         </AuthorizationContext.Provider>
 
 

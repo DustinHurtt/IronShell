@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
-import FindMentor from "../pages/FindMentor"
+import FindMentor from "../pages/FindMentors"
 
 const PrivateRoutes = ({logout}) => {
 

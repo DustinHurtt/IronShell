@@ -1,13 +1,17 @@
 var express = require("express");
 var router = express.Router();
 
-const User = require("../models/User.model");
+const Student = require("../models/Student.model");
+const Quiz = require("../models/Quiz.model")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const saltRounds = 10;
 require("dotenv/config");
 
 const isLoggedIn = require("../middleware/isLoggedIn");
+
+const cloudinary = require("../middleware/cloudinary");
+const upload = require("../middleware/multer");
 
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
@@ -18,7 +22,7 @@ router.post("/signup", function (req, res, next) {
     return res.status(400).json({ message: "please fill out both fields" });
   }
 
-  User.findOne({ username: req.body.username })
+  Student.findOne({ username: req.body.username })
     .then((foundUser) => {
       if (foundUser) {
         return res.status(400).json({ message: "Username is already taken" });
@@ -26,7 +30,7 @@ router.post("/signup", function (req, res, next) {
         const salt = bcrypt.genSaltSync(saltRounds);
         const hashedPass = bcrypt.hashSync(req.body.password, salt);
 
-        User.create({
+        Student.create({
           username: req.body.username,
           password: hashedPass,
           email: req.body.email
@@ -55,7 +59,7 @@ router.post("/login", function (req, res, next) {
     return res.json({ message: "please fill out both fields" });
   }
 
-  User.findOne({ username: req.body.username })
+  Student.findOne({ username: req.body.username })
     .then((foundUser) => {
       if (!foundUser) {
         return res.json({ message: "Username or Password is incorrect!!!" });
@@ -87,9 +91,53 @@ router.get("/login-test", isLoggedIn, (req, res) => {
   res.json({ message: "You are logged in" });
 });
 
+router.post(
+    "/edit-profile-with-picture",
+    isLoggedIn,
+    upload.single("imageUrl"),
+    async (req, res) => {
+      try {
+        const result = await cloudinary.uploader.upload(req.file.path);
+  
+        Student.findByIdAndUpdate(req.user._id, {
+          imageUrl: result.secure_url,
+        })
+          .then((newlyCreatedProfile) => {
+            res.json({ newlyCreatedProfile });
+          })
+          .catch((error) =>
+            console.log(`Error while creating a new profile: ${error}`)
+          );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  );
+
+router.post("/edit-profile-without-picture", isLoggedIn, (req, res, next) => {
+  Student.findByIdAndUpdate(req.user._id, { ...req.body }, { new: true })
+    .then(function (updatedProfile) {
+      res.json(updatedProfile);
+    })
+    .catch(function (error) {
+      res.json(error);
+    });
+});
+
+router.get("/:id/details", (req, res, next) => {
+    Student.findById(req.params.id)
+      .populate({ path: "quizzes" })
+      .populate({ path: "mentors" })  
+      .then(function (result) {
+        res.json({ result });
+      })
+      .catch(function (error) {
+        res.json(error);
+      });
+  });
 
 router.post("/delete-user", isLoggedIn, (req, res, next) => {
-  User.findById(req.user._id)
+  Student.findById(req.user._id)
     .then((foundUser) => {
       const doesMatch = bcrypt.compareSync(
         req.body.password,
