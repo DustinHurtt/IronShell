@@ -13,7 +13,7 @@ const FinalScreen = () => {
   const handleBackToSettings = () => {
     dispatch(handleScoreChange(0));
     dispatch(handleAmountChange(50));
-    history.push("/");
+    history("/quiz2");
   };
 
   return (

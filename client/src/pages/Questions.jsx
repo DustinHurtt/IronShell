@@ -69,7 +69,7 @@ const Questions = () => {
     if (questionIndex + 1 < response.results.length) {
       setQuestionIndex(questionIndex + 1);
     } else {
-      history.push("/score");
+      history("/score");
     }
   };
 

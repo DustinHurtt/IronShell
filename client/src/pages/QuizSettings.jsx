@@ -33,13 +33,13 @@ const QuizSettings = () => {
   ];
 
   const typeOptions = [
-    { id: "multiple", name: "Multiple Choise" },
+    { id: "multiple", name: "Multiple Choice" },
     { id: "boolean", name: "True/False" },
   ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push("/questions");
+    history("/questions");
   };
 
   return (
