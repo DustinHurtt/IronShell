@@ -18,3 +18,4 @@ const PrivateRoutes = ({logout}) => {
 }
 
 export default PrivateRoutes
+
