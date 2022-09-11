@@ -1,5 +1,15 @@
 import React from 'react'; 
-import { Routes, Route, Link, useNavigate } from "react-router-dom";  
+import { Routes, Route, NavLink, useNavigate } from "react-router-dom";  
+
+
+const styles = {
+  display: 'flex',
+  justifyContent: 'space-around',
+};
+
+const activeStyle = ({ isActive }) => {
+  return { color: isActive ? 'Red' : 'black' };
+};
 
 const NavBar = () =>{
 
@@ -11,22 +21,22 @@ const NavBar = () =>{
     
 
     return (
-    <div className="navbar">
+    <div className="navbar-container" style={styles}>
         
         
         {token ? (
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/find-mentor">Find Mentor</Link>
-          <Link to="">Log Out</Link>
+          <NavLink to="/" style={activeStyle}>Home</NavLink>
+          <NavLink to="/find-mentor" style={activeStyle}>Find Mentor</NavLink>
+          <NavLink to="" style={activeStyle}>Log Out</NavLink>
           {/* <Link to="/login">Login</Link> */}
        
         </nav>
          ) : (
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
+          <NavLink to="/" style={activeStyle}>Home</NavLink>
+          <NavLink to="/signup" style={activeStyle}>Signup</NavLink>
+          <NavLink to="/login" style={activeStyle}>Login</NavLink>
           {/* <Link to="/login">Login</Link> */}
         </nav>
          )}

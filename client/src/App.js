@@ -99,6 +99,33 @@ const App = (props) => {
             {!!token ? <PrivateRoutes logout={logout} /> : <PublicRoutes registerMentor={registerMentor} registerStudent={registerStudent} loginMentor={loginMentor} loginStudent={loginStudent} setErrorMessage={setErrorMessage}  />}
         </AuthorizationContext.Provider>
 
+{/* 
+-Quiz with style but I can't figure out the route errors
+-made a new folder for the redux I'm using
+-added a few dependencies 
+-any .jsx file added was me (just trying to keep the files separate and with what im used to )
+- added hooks folder for custom axios call
+-only messed with the NavBar a little bit
+ */}
+        
+        {/* <Container maxWidth="sm">
+        <Box textAlign="center" mt={5}>
+          <Routes>
+            <Route path="/">
+              <Typography variant="h2" fontWeight="bold">
+                Quiz App
+              </Typography>
+              <QuizSettings />
+            </Route>
+            <Route path="/questions">
+              <Questions />
+            </Route>
+            <Route path="/score">
+              <FinalScreen />
+            </Route>
+          </Routes>
+        </Box>
+      </Container> */}
 
     </div>
   );
