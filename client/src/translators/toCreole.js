@@ -1,3 +1,5 @@
+// import { response } from '../../../server/app';
+
 const axios = require('axios').default;
 const { v4: uuidv4 } = require('uuid');
 
@@ -8,14 +10,30 @@ var endpoint = "https://api.cognitive.microsofttranslator.com";
 // This is required if using a Cognitive Services resource.
 // var location = "YOUR_RESOURCE_LOCATION";
 
-export const toCreole = (text) => {
+// const axiosTest = async () {
+//     try {
+//       const {data:response} = await axios.get(url) //use data destructuring to get data from the promise object
+//       return response
+//     }
+      
+//     catch (error) {
+//       console.log(error);
+//     }
+//   }
 
-    axios({
+export const toCreole = async (text) => {
+// 
+
+try {
+const {data:response} = await 
+// Promise.resolve(
+axios({
         baseURL: endpoint,
         url: '/translate',
         method: 'post',
         headers: {
             'Ocp-Apim-Subscription-Key': key,
+            'Ocp-Apim-Subscription-Region': 'eastus',
             'Content-type': 'application/json',
             'X-ClientTraceId': uuidv4().toString()
         },
@@ -28,8 +46,19 @@ export const toCreole = (text) => {
             'text': `${text}`
         }],
         responseType: 'json'
-    }).then(function(response){
-        console.log(JSON.stringify(response.data, null, 4));
     })
-
+    // )
+    console.log(response[0].translations[0].text, "&&&")
+  return String(response[0].translations[0].text)
+ }
+    // .then(function(response){
+    //     console.log(JSON.stringify(response.data, null, 4));
+    //     console.log(response.data[0].translations[0].text, "TEXTFROMTRANSLATE");
+    //     return response.data;
+       
+    // })
+    // return Promise.resolve(translated)
+    catch (error) {
+        console.log(error);
+      }
 }
