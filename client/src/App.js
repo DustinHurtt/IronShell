@@ -7,6 +7,8 @@ import SnackbarError from "./components/SnackbarError";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import PublicRoutes from "./routes/PublicRoutes";
 
+import NavBar from "./components/Entry/NavBar";
+
 const AuthorizationContext  = React.createContext();
 
 const App = (props) => {
@@ -58,6 +60,9 @@ const App = (props) => {
 
   return (
     <div>
+      <header>
+        <NavBar/>
+      </header>
       {snackBarOpen && (
         <SnackbarError
           setSnackBarOpen={setSnackBarOpen}
