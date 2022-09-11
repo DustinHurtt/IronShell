@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,8 +16,12 @@ import SideImage from "../components/Entry/SideImage";
 
 // import {theme} from '../themes/theme'
 
+
+
 const Landing = (props) => {
-  const [switchEntry, setSwitchEntry] = useState(true);
+  const [switchEntry, setSwitchEntry] = useState(false);
+
+  const params = useParams()
   
   const theme = createTheme({
     typography: {
@@ -43,7 +48,15 @@ const Landing = (props) => {
 
   const changeEntry = () => {
     setSwitchEntry(!switchEntry);
+
+    const loginCheck = `/${params}`
+    console.log(loginCheck)
+    // if( loginCheck.includes("login")) {
+    //   setSwitchEntry(switchEntry)
+    // }
   };
+
+
 
   return (
     <ThemeProvider theme={theme} >

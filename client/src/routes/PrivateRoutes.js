@@ -1,15 +1,21 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import Quiz from "../pages/Quiz";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Home from '../pages/Home';
+import FindMentor from "../pages/FindMentors"
 
-const PrivateRoutes = ({ logout }) => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home logout={logout} />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-      <Route path="/quiz" element={<Quiz />} />
-    </Routes>
-  );
-};
+const PrivateRoutes = ({logout}) => {
 
-export default PrivateRoutes;
+    return (
+        <Routes>
+            <Route path="/" element={<Home logout={logout} />}  />
+            <Route path="/find-mentor" element={<FindMentor />}  />
+            <Route
+                path="*"
+                element={<Navigate to="/" replace />}
+            />
+        </Routes> 
+        )
+
+}
+
+export default PrivateRoutes
+

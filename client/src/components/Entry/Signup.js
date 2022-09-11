@@ -17,9 +17,9 @@ import EntryButton from "./EntryButton";
 const regexExp =
 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
 
-const Signup = ({ register, changeEntry, setErrorMessage }) => {
+const Signup = ({ registerMentor, registerStudent, changeEntry, setErrorMessage }) => {
 
-
+  const isMentor = React.useState(false)
 
 
   const handleRegister = async (event) => {
@@ -42,7 +42,7 @@ const Signup = ({ register, changeEntry, setErrorMessage }) => {
       setErrorMessage(`Welcome ${username}!`);
     
 
-    await register({ username, email, password });
+    await isMentor ? registerMentor({ username, password }) : registerStudent({ username, password })
     };
   }
 
