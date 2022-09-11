@@ -67,7 +67,6 @@ const Landing = (props) => {
         {switchEntry ? (
           <Login
             user={props.user}
-            register={props.register}
             login={props.login}
             setErrorMessage={props.setErrorMessage}
 
@@ -75,7 +74,8 @@ const Landing = (props) => {
           />
         ) : (
           <Signup
-            register={props.register}
+            registerStudent={props.registerStudent}
+            registerMentor={props.registerMentor}
             login={props.login}
             setErrorMessage={props.setErrorMessage}
             changeEntry={changeEntry}
